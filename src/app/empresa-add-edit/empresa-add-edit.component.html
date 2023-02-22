@@ -1,0 +1,22 @@
+<div mat-dialog-title>
+    <h1>{{data ? 'Atualizar' : 'Nova'}} Empresa</h1>
+</div>
+<form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <!-- <mat-form-field appearance="fill"></mat-form-field> -->
+            <mat-form-field appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input matInput type="text" placeholder="Nome da Empresa" formControlName="nome">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>CNPJ</mat-label>
+                <input matInput type="number" placeholder="00000000000000" formControlName="cnpj" mask='{99.999.999/9999-99}'>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancelar</button>
+        <button mat-raised-button type="submit" color="primary">Ok</button>
+    </div>
+</form>
