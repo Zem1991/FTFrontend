@@ -17,11 +17,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table'; 
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { ProdutoAddEditComponent } from './produto-add-edit/produto-add-edit.component';
+import { CompraAddEditComponent } from './compra-add-edit/compra-add-edit.component';
+import { EmpresaListComponent } from './empresa-list/empresa-list.component';
+import { ProdutoListComponent } from './produto-list/produto-list.component';
+import { CompraListComponent } from './compra-list/compra-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmpresaAddEditComponent
+    EmpresaAddEditComponent,
+    ProdutoAddEditComponent,
+    CompraAddEditComponent,
+    EmpresaListComponent,
+    ProdutoListComponent,
+    CompraListComponent,
   ],
   imports: [
     BrowserModule,

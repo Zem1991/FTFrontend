@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EmpresaAddEditComponent } from './empresa-add-edit/empresa-add-edit.component';
 import { EmpresaService } from './services/empresa.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { ProdutoAddEditComponent } from './produto-add-edit/produto-add-edit.component';
+import { CompraAddEditComponent } from './compra-add-edit/compra-add-edit.component';
+import { ProdutoService } from './services/produto.service';
+import { CompraService } from './services/compra.service';
 
 @Component({
   selector: 'app-root',
@@ -14,16 +15,15 @@ import { MatSort } from '@angular/material/sort';
 export class AppComponent implements OnInit {
   title = 'FTFrontend';
 
-  displayedColumns: string[] = ['id', 'nome', 'cnpj', 'actions'];
-  dataSource!: MatTableDataSource<any>;
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  constructor(private _dialog: MatDialog, private _empresaService: EmpresaService){}
+  constructor(
+    private _dialog: MatDialog, 
+    private _empresaService: EmpresaService,
+    private _produtoService: ProdutoService,
+    private _compraService: CompraService,
+  ){}
 
   ngOnInit(): void {
-      this.getEmpresaList();
+    // this.getEmpresaList();
   }
 
   openEmpresaAddEdit(){
@@ -31,56 +31,31 @@ export class AppComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: (res) => {
         if (res){
-          this.getEmpresaList();
+          this._empresaService.getList();
         }
       }
     });
   }
 
-  getEmpresaList(){
-    this._empresaService.getList().subscribe({
-      next: (res: any) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      },
-      error: (err: any) => {
-        alert(err);
-      }
-    });
-  }
-
-  editEmpresa(data: any){
-    const dialogRef = this._dialog.open(EmpresaAddEditComponent, {
-      data,
-    });
+  openProdutoAddEdit(){
+    const dialogRef = this._dialog.open(ProdutoAddEditComponent);
     dialogRef.afterClosed().subscribe({
       next: (res) => {
         if (res){
-          this.getEmpresaList();
+          this._produtoService.getList();
         }
       }
     });
   }
 
-  deleteEmpresa(id: number){
-    this._empresaService.delete(id).subscribe({
-      next: (res: any) => {
-        alert('Empresa deletada.');
-        this.getEmpresaList();
-      },
-      error: (err: any) => {
-        alert(err);
+  openCompraAddEdit(){
+    const dialogRef = this._dialog.open(CompraAddEditComponent);
+    dialogRef.afterClosed().subscribe({
+      next: (res) => {
+        if (res){
+          this._compraService.getList();
+        }
       }
     });
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
 }
