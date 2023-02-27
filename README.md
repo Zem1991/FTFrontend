@@ -1,5 +1,18 @@
 # FTFrontend
 
+Feito em conjunto com o projeto [FTBackend](https://github.com/Zem1991/FTBackend).
+
+Um simples aplicativo para a leitura, criação, atualização e exclusão de registros de empresas, produtos e compras.
+Tanto o backend quanto o banco de dados estão contidos em um contâiner Docker. Já o frontend é feito em Angular, rodando no navegador.
+
+Para executar, basta o comando: `ng serve`. O mesmo irá abrir o endereço `http://localhost:4200/`.
+Porém, sem o FTBackend em execução este projeto apenas retornará erros.
+
+--  --
+--  --
+
+# FTFrontend
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
 
 ## Development server
